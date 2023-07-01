@@ -33,7 +33,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/bg_login_register"
             android:hint="Enter your username"
-            android:inputType="number"
+            android:inputType="text"
             android:textColorHint="@color/color_hint"
             android:textColor="@color/color_hint"
             android:textSize="20sp" />
