@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "719007518202",
+    "project_id": "dragon-chat-460d7",
+    "storage_bucket": "dragon-chat-460d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719007518202:android:6b2688d89b7be76baae843",
+        "android_client_info": {
+          "package_name": "com.quocanproject.dragonchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719007518202-qjbj2a3aa77t8kqvvm0bslpq6mchldet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1DuSrCD7IOfuykTlXgUiEJcWn_N6uvpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719007518202-qjbj2a3aa77t8kqvvm0bslpq6mchldet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
