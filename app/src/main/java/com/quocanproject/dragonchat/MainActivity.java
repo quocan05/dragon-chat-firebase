@@ -3,6 +3,7 @@ package com.quocanproject.dragonchat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.homeMenu);
 
         btnSearchMain.setOnClickListener(view -> {
-
+            //search chat
+            Intent intent = new Intent(MainActivity.this, SearchChatActivity.class);
+            startActivity(intent);
         });
     }
 

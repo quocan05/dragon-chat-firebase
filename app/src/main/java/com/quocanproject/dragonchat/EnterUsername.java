@@ -49,7 +49,7 @@ public class EnterUsername extends AppCompatActivity {
             edtUsernameInput.setError("Username length should be least 5 characters !");
             return;
         } else {
-            user = new User(phoneNumber, username, Timestamp.now());
+            user = new User(phoneNumber, username, Timestamp.now(), FirebaseUtil.currentUserID());
         }
 
         FirebaseUtil.currentUserDetails().set(user).addOnCompleteListener(new OnCompleteListener<Void>() {

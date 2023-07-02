@@ -8,17 +8,28 @@ public class User {
     private String username;
     private Timestamp timeCreated;
 
+    private String uID;
+
     public User() {
     }
 
-    public User(String phone, String username, Timestamp timeCreated) {
+    public User(String phone, String username, Timestamp timeCreated, String id) {
         this.phone = phone;
         this.username = username;
         this.timeCreated = timeCreated;
+        this.uID = id;
     }
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getuID() {
+        return uID;
+    }
+
+    public void setuID(String uID) {
+        this.uID = uID;
     }
 
     public void setPhone(String phone) {
