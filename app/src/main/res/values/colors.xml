@@ -12,4 +12,7 @@
 
     <color name="light_gray">#939393</color>
     <color name="dark_gray">#535353</color>
+
+    <color name="color_send">#2196F3</color>
+    <color name="color_receive">#DF9E33</color>
 </resources>
