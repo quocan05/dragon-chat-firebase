@@ -1,9 +1,13 @@
 package com.quocanproject.dragonchat.utils;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class FirebaseUtil {
 
@@ -40,5 +44,24 @@ public class FirebaseUtil {
         }else {
             return uid2+"_"+uid1;
         }
+    }
+
+    public static CollectionReference allChatRoomCollectionRef(){
+        return FirebaseFirestore.getInstance().collection("chatrooms");
+    }
+
+    public static DocumentReference getOtherUserFromChatRoom(List<String> uIDs){
+        if(uIDs.get(0).equals(FirebaseUtil.currentUserID())){
+            return allUserCollectionRef().document(uIDs.get(1));
+        }
+        else {
+            return allUserCollectionRef().document(uIDs.get(0));
+        }
+    }
+
+
+    public static String TimestampToString(Timestamp time){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(time.toDate());
     }
 }

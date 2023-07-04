@@ -7,6 +7,8 @@ public class ChatMessage {
     private String senderID;
     private Timestamp timestamp;
 
+
+
     public ChatMessage() {
     }
 

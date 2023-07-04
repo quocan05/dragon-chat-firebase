@@ -57,7 +57,7 @@ public class SearchChatActivity extends AppCompatActivity {
     }
 
     private void getSearchResult(String resultEntered) {
-        AndroidUtil.showToast(getApplicationContext(), resultEntered);
+        //AndroidUtil.showToast(getApplicationContext(), resultEntered);
 
         Query query = FirebaseUtil.allUserCollectionRef()
                 .whereEqualTo("username", resultEntered);

@@ -6,11 +6,10 @@
     android:background="@color/light_gray"
     tools:context=".FragHome">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="This is home fragment" />
+        android:id="@+id/rcvHomeChatCurrent"
+        />
 
 </RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card"
+    android:layout_margin="10dp">
+
+    <include layout="@layout/profile_pic_view"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:id="@+id/imgProfileHome"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:id="@+id/tvUsernameHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tvLastMessageHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="hello babyyyy"
+                android:textColor="@color/dark_gray"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTimestampLastSendHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23:00"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/dark_gray"
+            android:textSize="18sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="14dp"
+            />
+    </RelativeLayout>
+</LinearLayout>

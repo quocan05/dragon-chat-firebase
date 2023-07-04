@@ -10,6 +10,16 @@ public class ChatRoom {
     private Timestamp lastMsgTimestamp;
     private String lastMsgSenderID;
 
+    private String lastMsg;
+
+    public String getLastMsg() {
+        return lastMsg;
+    }
+
+    public void setLastMsg(String lastMsg) {
+        this.lastMsg = lastMsg;
+    }
+
     public ChatRoom() {
     }
 

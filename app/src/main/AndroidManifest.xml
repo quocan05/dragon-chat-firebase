@@ -21,9 +21,6 @@
             android:name=".SearchChatActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchUserActivity"
-            android:exported="false" />
-        <activity
             android:name=".EnterUsername"
             android:exported="false" />
         <activity
