@@ -83,7 +83,7 @@ public class FragHome extends Fragment {
     public void onResume() {
         super.onResume();
         if (currentChatAdapter!=null){
-            currentChatAdapter.startListening();
+            currentChatAdapter.notifyDataSetChanged();
         }
     }
 }
