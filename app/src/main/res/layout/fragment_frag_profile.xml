@@ -3,14 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
-    tools:context=".FragProfile">
+    android:background="@drawable/bg916"
+    tools:context=".FragProfile"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/img"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtUsernameProfile"
+        android:layout_below="@+id/imgProfile"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_edt_border"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneNumberProfile"
+        android:layout_below="@+id/edtUsernameProfile"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_edt_border"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:editable="false"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Update profile"
+        android:id="@+id/btnUpdateProfile"
+        android:layout_below="@id/phoneNumberProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="This is profile fragment" />
+        android:text="Sign out"
+        android:id="@+id/tvSignOut"
+        android:textSize="24dp"
+        android:textColor="@color/primary_color"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        />
+
 
 </RelativeLayout>

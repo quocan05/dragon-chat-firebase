@@ -64,4 +64,8 @@ public class FirebaseUtil {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(time.toDate());
     }
+
+    public static void signOut(){
+        FirebaseAuth.getInstance().signOut();
+    }
 }
