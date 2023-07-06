@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -38,6 +40,7 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton btnSendMsg, btnBackChat;
 
     RecyclerView recyclerView;
+    ImageView imgProfileUserOnChat;
     ChatRecycleAdapter chatRecycleAdapter;
 
     String chatRoomID;
@@ -50,7 +53,13 @@ public class ChatActivity extends AppCompatActivity {
         userToChat = AndroidUtil.getUserFromIntent(getIntent());
         chatRoomID = FirebaseUtil.getChatRoomId(FirebaseUtil.currentUserID(), userToChat.getuID());
         initUI();
-
+        FirebaseUtil.getOtherUserProfilePictureStorageRef(userToChat.getuID()).getDownloadUrl()
+                .addOnCompleteListener(t -> {
+                    if (t.isSuccessful()){
+                        Uri uri = t.getResult();
+                        AndroidUtil.setProfilePicture(this, uri, imgProfileUserOnChat);
+                    }
+                });
         sendMsg();
 
     }
@@ -88,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         btnSendMsg = findViewById(R.id.btnSendMsg);
         btnBackChat = findViewById(R.id.btnBackChat);
         edtInputMsg = findViewById(R.id.edtTypeMessage);
+        imgProfileUserOnChat = findViewById(R.id.picProfile);
         recyclerView = findViewById(R.id.rcvChatLine);
 
         tvUsernameToChat.setText(userToChat.getUsername().toString().trim());

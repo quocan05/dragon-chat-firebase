@@ -2,6 +2,7 @@ package com.quocanproject.dragonchat.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +32,21 @@ public class SearchUserRCVAdapter extends FirestoreRecyclerAdapter<User, SearchU
     @Override
     protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull User model) {
 
+
+
         holder.tvUsername.setText(model.getUsername());
         holder.tvPhoneNumber.setText(model.getPhone());
         if (model.getuID().equals(FirebaseUtil.currentUserID())){
             holder.tvUsername.setText(model.getUsername() +"(YOU)");
         }
+
+        FirebaseUtil.getOtherUserProfilePictureStorageRef(model.getuID()).getDownloadUrl()
+                .addOnCompleteListener(t -> {
+                    if (t.isSuccessful()){
+                        Uri uri = t.getResult();
+                        AndroidUtil.setProfilePicture(context, uri, holder.imgProfile);
+                    }
+                });
 
         holder.itemView.setOnClickListener(view -> {
             //navigate to chat box

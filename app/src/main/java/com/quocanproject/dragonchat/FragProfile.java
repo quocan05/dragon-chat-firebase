@@ -1,8 +1,12 @@
 package com.quocanproject.dragonchat;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -11,14 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.quocanproject.dragonchat.model.User;
 import com.quocanproject.dragonchat.utils.AndroidUtil;
 import com.quocanproject.dragonchat.utils.FirebaseUtil;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class FragProfile extends Fragment {
 
@@ -29,6 +38,11 @@ public class FragProfile extends Fragment {
 
     User currentUser;
 
+    ImageView imgProfile;
+
+    ActivityResultLauncher<Intent> pickImgLauncher;
+    Uri selectedImgUri;
+
     public FragProfile() {
         // Required empty public constructor
     }
@@ -36,6 +50,16 @@ public class FragProfile extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pickImgLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK){
+                        Intent data = result.getData();
+                        if (data != null && data.getData() != null){
+                            selectedImgUri =  data.getData();
+                            AndroidUtil.setProfilePicture(getContext(), selectedImgUri, imgProfile);
+                        }
+                    }
+                });
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +67,8 @@ public class FragProfile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_frag_profile,container, false);
         initUI(view);
         getUserData();
+
+        setProfilePicture();
 
         btnUpdateProfile.setOnClickListener(view1 -> {
             String newUsername = edtUsername.getText().toString().trim();
@@ -52,12 +78,41 @@ public class FragProfile extends Fragment {
             }
             else {
                 currentUser.setUsername(newUsername);
-                updateToFireStore();
+                if(selectedImgUri != null){
+                    FirebaseUtil.getCurrentProfilePictureStorageRef().putFile(selectedImgUri)
+                            .addOnCompleteListener(task -> {
+                                updateToFireStore();
+                            });
+                } else {
+                    updateToFireStore();
+                }
+
             }
         });
 
+
+
+
+
         signOutUser();
         return view;
+    }
+
+    private void setProfilePicture() {
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(FragProfile.this).cropSquare().compress(1080).maxResultSize(1080, 1080)
+                        .createIntent(new Function1<Intent, Unit>() {
+                            @Override
+                            public Unit invoke(Intent intent) {
+                                pickImgLauncher.launch(intent);
+
+                                return null;
+                            }
+                        });
+            }
+        });
     }
 
     private void signOutUser() {
@@ -87,6 +142,15 @@ public class FragProfile extends Fragment {
     }
 
     private void getUserData() {
+
+        FirebaseUtil.getCurrentProfilePictureStorageRef().getDownloadUrl()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                Uri uri = task.getResult();
+                                AndroidUtil.setProfilePicture(getContext(), uri, imgProfile);
+                            }
+                        });
+
         FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
            currentUser = task.getResult().toObject(User.class);
            edtUsername.setText(currentUser.getUsername());
@@ -99,5 +163,6 @@ public class FragProfile extends Fragment {
         edtphoneNumber = view.findViewById(R.id.phoneNumberProfile);
         btnUpdateProfile = view.findViewById(R.id.btnUpdateProfile);
         tvSignout = view.findViewById(R.id.tvSignOut);
+        imgProfile = view.findViewById(R.id.imgFragmentProfile);
     }
 }

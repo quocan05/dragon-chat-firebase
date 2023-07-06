@@ -2,6 +2,7 @@ package com.quocanproject.dragonchat.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,15 @@ public class CurrentChatAdapter extends FirestoreRecyclerAdapter<ChatRoom, Curre
                         boolean isLastMsgSendByMe = model.getLastMsgSenderID().equals(FirebaseUtil.currentUserID());
 
                         User otherUser = task.getResult().toObject(User.class);
+
+                        FirebaseUtil.getOtherUserProfilePictureStorageRef(otherUser.getuID()).getDownloadUrl()
+                                .addOnCompleteListener(t -> {
+                                    if (t.isSuccessful()){
+                                        Uri uri = t.getResult();
+                                        AndroidUtil.setProfilePicture(context, uri, holder.profilePic);
+                                    }
+                                });
+
                         holder.username.setText(otherUser.getUsername());
 
                         if(isLastMsgSendByMe){
