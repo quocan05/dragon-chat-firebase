@@ -22,6 +22,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.quocanproject.dragonchat.model.User;
 import com.quocanproject.dragonchat.utils.AndroidUtil;
 import com.quocanproject.dragonchat.utils.FirebaseUtil;
@@ -117,12 +118,20 @@ public class FragProfile extends Fragment {
 
     private void signOutUser() {
         tvSignout.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                FirebaseUtil.signOut();
-                Intent intent = new Intent(getContext(), SplashActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+
+                FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        FirebaseUtil.signOut();
+                        Intent intent = new Intent(getContext(), SplashActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }

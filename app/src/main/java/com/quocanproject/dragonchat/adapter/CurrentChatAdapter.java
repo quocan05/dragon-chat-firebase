@@ -1,5 +1,6 @@
 package com.quocanproject.dragonchat.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,6 +34,7 @@ public class CurrentChatAdapter extends FirestoreRecyclerAdapter<ChatRoom, Curre
         this.context = context;
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onBindViewHolder(@NonNull ChatRoomViewHolder holder, int position, @NonNull ChatRoom model) {
         FirebaseUtil.getOtherUserFromChatRoom(model.getUserIDs())
